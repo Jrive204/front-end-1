@@ -28,10 +28,13 @@ const Profile = props => {
   //       console.log(err);
   //     });
   // }, []);
+
   console.log(currentuser);
+  const loadingcheck = !items && !loading;
+
   useEffect(() => {
     dispatch(Fetch());
-  }, [dispatch]);
+  }, [loadingcheck, dispatch]);
   return (
     <ProfileContainer>
       {console.log(currentuser, "currentuser")}
@@ -67,7 +70,7 @@ const Profile = props => {
             <span style={{ paddingLeft: "20px" }}>{check}</span>
           </ListGroup.Item>
           <ListGroup.Item style={{ border: "none" }}>
-            Email: <span style={{ paddingLeft: "20px" }}>{check}</span>
+            ID uploaded: <span style={{ paddingLeft: "20px" }}>{noCheck}</span>
           </ListGroup.Item>
           <ListGroup.Item style={{ border: "none" }}>
             Phone number: <span style={{ paddingLeft: "20px" }}>{noCheck}</span>
@@ -81,7 +84,6 @@ const Profile = props => {
           style={{
             padding: "1em 0em",
             fontSize: "2.5rem",
-            height: "50vh",
             border: "none"
           }}>
           {currentuser.department === "owner" ? (
@@ -92,6 +94,8 @@ const Profile = props => {
           ) : null}
 
           <ListGroup.Item style={{ border: "none" }}>
+            {!items && !loading && <h2>Waiting on the items ... </h2>}
+
             {items && !loading && (
               <>
                 {items
@@ -151,7 +155,14 @@ const Profile = props => {
               <Stars />
               <p>No reviews yet</p>
               <span style={{ opacity: ".8" }}>
-                {currentuser.username} hasn't rented anything out yet
+                <span
+                  style={{
+                    fontWeight: "bolder"
+                  }}
+                >
+                  {currentuser.username}
+                </span>{" "}
+                hasn't rented anything out yet
               </span>
             </ListGroup.Item>
           ) : (

@@ -38,9 +38,8 @@ export const NavbarContainer = styled.div`
     background: white;
     margin: 1em;
     border-radius: 3em;
-    @media screen and (max-width: 400px) {
-      width: 30px;
-      height: 30px;
+    @media screen and (max-width: 500px) {
+      display: none;
     }
   }
   .nav-bar {
@@ -51,6 +50,9 @@ export const NavbarContainer = styled.div`
     background: black;
     @media screen and (min-width: 800px) {
       margin-right: 10px;
+    }
+    @media screen and (max-width: 500px) {
+      width: 100%;
     }
   }
   nav {
@@ -75,8 +77,9 @@ export const NavbarContainer = styled.div`
   }
   .loggedSpan {
     @media (max-width: 500px) {
-      font-size: 0.3rem;
-      margin: 0px 0px 0px -25px;
+      font-size: 0.5rem;
+      margin: 0;
+      padding: 10px;
     }
   }
 
@@ -815,6 +818,7 @@ export const SearchFormContainer = styled.label`
     font-family: "Nixie One", cursive;
     transition: width 0.5s linear;
     transition-timing-function: ease;
+    transition-delay: 2s;
   }
 
   .search_icon {
@@ -828,7 +832,6 @@ export const SearchFormContainer = styled.label`
   }
 
   .dv:hover .inpt {
-    padding: 0 10px;
     width: 18.75em;
     transition: width 0.5s linear;
     background: white;
@@ -1265,7 +1268,8 @@ export const TestimonialContainer = styled.div`
     display: block;
     font-size: 1.125em;
     font-weight: 700;
-    padding-top: 3em;
+    padding-top: 4em;
+    padding-bottom: 1em;
     text-transform: uppercase;
     text-align: center;
   }

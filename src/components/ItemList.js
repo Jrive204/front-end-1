@@ -10,35 +10,48 @@ const ItemList = () => {
   const products = useSelector(state => state.data);
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
-  const [items, setItems] = useState([]);
+  // const [items, setItems] = useState([]);
 
   useEffect(() => {
     dispatch(Fetch());
   }, [dispatch]);
-  useEffect(() => {
-    var filtered = products.filter(x => {
-      return x.item_name.toLowerCase().indexOf(search.toLowerCase()) !== -1;
-    });
-    setItems(filtered);
-  }, [search, products]);
+  // useEffect(() => {
+  //   var filtered = products.filter(x => {
+  //     return x.item_name.toLowerCase().indexOf(search.toLowerCase()) !== -1;
+  //   });
+  //   setItems(filtered);
+  // }, [search, products]);
 
-  // const filtered = products.filter(x => {
-  //   return (
-  //     x.item_name.toLowerCase().indexOf(search.toLowerCase().trim()) !== -1
-  //   );
-  // });
-  console.log(products);
+  const filtered = products.filter(x => {
+    return (
+      x.item_name.toLowerCase().indexOf(search.toLowerCase().trim()) !== -1
+    );
+  });
+
+  const onMouseLeave = e => {
+    console.log(e);
+    e.target.value = "";
+    setTimeout(() => {
+      setSearch("");
+    }, 4000);
+  };
+
   const handleInput = e => {
     setSearch(e.target.value);
   };
+
   return (
     // ITEMS NOT AVAILABLE NOW DONT SHOW UP ON ITEMS LIST
     <main>
-      <SearchForm handleInput={handleInput} search={search} />
+      <SearchForm
+        onMouseLeave={onMouseLeave}
+        handleInput={handleInput}
+        search={search}
+      />
       <Scroll>
         <ItemContainer>
-          {items
-            .filter(item => item.availability !== 0)
+          {filtered
+            // .filter(item => item.availability !== 0) // SHOWS ONLY AVAILABLE PRODUCTS
             .map(item => (
               <div class='container'>
                 <div class='card u-clearfix'>
